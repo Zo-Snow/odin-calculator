@@ -1,92 +1,109 @@
-let string = "";
-let string2 = "";
-let mathButton = "";
+let currentValue = "";
+let prevValue = "";
+let currentOperator = ""; 
 
-displayNums("one", 1);
-displayNums("two", 2);
-displayNums("three", 3);
-displayNums("four", 4);
-displayNums("five", 5);
-displayNums("six", 6);
-displayNums("seven", 7);
-displayNums("eight", 8);
-displayNums("nine", 9);
-displayNums("zero", 0);
+const display = document.querySelector(".display");
+const operatorsList = document.querySelectorAll(".operator");
+const numbersList = document.querySelectorAll(".number");
+const clearButton = document.querySelector(".clear");
+const equalsButton = document.querySelector(".equal");
 
-document.querySelector(".clear").addEventListener('click', () => {
-    clear();
-})
+numbersList.forEach((number) => {
+    number.addEventListener('click', () => {   
+        currentValue = currentValue + number.textContent;
+        updateDisplay(currentValue);
 
-const buttonsList = ["add", "subtract", "multiply", "divide"];
+    });
+}) 
 
-buttonsList.map((button) => {
-    document.querySelector(`.${button}`).addEventListener('click', () => {
-        string2 = string;
-        clear();
-        mathButton = button;
-    })
-})
+operatorsList.forEach((button) => {
+    button.addEventListener('click', () => {
+        if (button.textContent === "+") {
+            setValues("add");
+        } 
+        
+        else if (button.textContent === "-") {
+            setValues("subtract");
+        } 
+        
+        else if (button.textContent === "x") {
+            setValues("multiply");
+        } 
+        
+        else if (button.textContent === "÷") {
+            setValues("divide");
+        }
+ })})
 
-document.querySelector('.equal').addEventListener('click', () => {
-    console.log(mathButton);
-    if (mathButton === "add") {
-        getSolution(add);
-    } else if (mathButton === "subtract") {
-        getSolution(subtract);
-    } else if (mathButton === "multiply") {
-        getSolution(multiply);
-    } else {
-        getSolution(divide);
+equalsButton.addEventListener('click', () => {
+    if (currentOperator === "add") {
+        let answer = parseInt(prevValue) + parseInt(display.textContent);
+        updateDisplay(answer);
+        resetValues();
+        
+    } 
+    else if (currentOperator === "subtract") {
+        let answer = parseInt(prevValue) - parseInt(display.textContent);
+        updateDisplay(answer);
+        resetValues();
+    } 
+    else if (currentOperator === "multiply") {
+        let answer = parseInt(prevValue) * parseInt(display.textContent);
+        updateDisplay(answer);
+        resetValues();
+    } 
+    else if (currentOperator === "divide") {
+        let answer = parseInt(prevValue) / parseInt(display.textContent);
+        updateDisplay(answer);
+        resetValues();
     }
 })
 
+clearButton.addEventListener('click', clearDisplay);
+
 // Functions
 
-function getSolution(operator) {
-    let value1 = parseInt(string);
-    let value2 = parseInt(string2);
-    console.log(value1);
-    console.log(value2);
-    let answer = calculator(operator, value2, value1);
-    console.log(typeof(answer));
-    document.querySelector(".display").textContent = answer;
-    string = answer;
+function resetValues() {
+    prevValue = "";
+    currentValue = "";
+    currentOperator = "";
 }
 
-function clear() {
-    document.querySelector(".display").textContent = "";
-    string = "";
+function setValues(operator) {
+    if (prevValue === "") {
+        prevValue = currentValue;
+        currentValue = "";
+    } else {operate();}
+      currentOperator = operator;
 }
 
-function displayNums(className, num) {
-    document.querySelector(`.${className}`).addEventListener('click', () => {
-        string = string + num;
-        document.querySelector(".display").textContent = string;
-    })
+function operate() {
+    if(currentOperator === "add") {
+        prevValue = parseInt(prevValue) + parseInt(currentValue);
+        currentValue = "";
+    } 
+    else if (currentOperator === "subtract") {
+        prevValue = parseInt(prevValue) - parseInt(currentValue);
+        currentValue = "";
+    } 
+    else if (currentOperator === "multiply") {
+        prevValue = parseInt(prevValue) * parseInt(currentValue);
+        currentValue = "";
+    } 
+    else if (currentOperator === "divide") {
+        prevValue = parseInt(prevValue) / parseInt(currentValue);
+        currentValue = "";
+    }
 }
 
-function add(n1, n2) {
-    return n1 + n2;
+function clearDisplay() {
+    updateDisplay("");
+    currentValue = "";
+    prevValue = "";
+    currentOperator = "";
 }
 
-function subtract(n1, n2) {
-    return n1 - n2;
+function updateDisplay(value) {
+    display.textContent = value;
 }
-
-function multiply(n1, n2) {
-    return n1 * n2;
-}
-
-function divide(n1, n2) {
-    return n1 / n2;
-}
-
-function calculator(operator, n1, n2) {
-    let result = operator(n1, n2);
-        return result; 
-}
-
-
-
-
 

@@ -1,4 +1,5 @@
 body{
+    background-color: pink;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,7 +11,11 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: gray;
+    background-color: rgb(250, 177, 189);
+    border: 2px solid rgba(186, 84, 125, 0.226);
+    border-style: outset;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
     width: 300px;
     height: 400px;
 }
@@ -19,13 +24,14 @@ body{
     padding-top: 6px;
     padding-left: 10px;
     font-size: 1.8rem;
-    background-color: rgb(67, 107, 67);
+    background-color: rgb(56, 147, 163);
+    color: rgb(14, 98, 113);
+    border-radius: 5px;
     width: 270px;
     height: 50px;
     margin-top: 10px;
     margin-bottom: 6px;
-    font-family: 'LED Digital 7', sans-serif; 
-                                  
+    font-family: 'LED Digital 7', sans-serif;                                
 }
 
 .row{
@@ -43,8 +49,48 @@ body{
 }
 
 button {
+    font-size: 1.1rem;
     flex: 1;
     padding: 0;
     margin: 0;
-    border: none;
+    border: 3px solid rgb(251, 161, 176);
+    color: rgb(251, 161, 176);
+    border-radius: 12px;
+    
+}
+
+button:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.operator, .equal {
+    font-size: 1.4rem;
+}
+
+.divide, .subtract, .add {
+    font-size: 1.8rem;
+}
+.image {
+    width: 50px;
+    height: 50px;
+    padding-top: 6px;
+    margin-left: 9px;
+    /* margin-right: 2px; */
+    padding-right: 6px;
+    opacity: 40%;
+    margin-right: 4px;
+}
+
+.face {
+    width: 120px;
+    margin: 0px 120px 0px 120px;
+    opacity: 55%;
+}
+
+p {
+    text-align: center;
+    margin-top: 0;
+    font-family: 'Kalam', cursive;
+    color:rgb(254, 155, 172);
+    font-size: 1.5rem;
 }
